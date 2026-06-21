@@ -1,5 +1,5 @@
 -- FMM Data Structures Implementation
--- Version: 0.03
+-- Version: 0.04
 -- Date: 2024-06-21
 -- Description: SPARK implementation of FMM data structures and algorithms
 
@@ -17,9 +17,9 @@ package body Fmm_Data_Structures is
    begin
       for I in 0 .. 20 loop
          Result := Result or
-           (Morton_Index (Temp_X and 1) and 2**(3*I)) or
-           (Morton_Index (Temp_Y and 1) and 2**(3*I + 1)) or
-           (Morton_Index (Temp_Z and 1) and 2**(3*I + 2));
+           (Morton_Index (Temp_X mod 2) * 2**(3*I)) or
+           (Morton_Index (Temp_Y mod 2) * 2**(3*I + 1)) or
+           (Morton_Index (Temp_Z mod 2) * 2**(3*I + 2));
          Temp_X := Temp_X / 2;
          Temp_Y := Temp_Y / 2;
          Temp_Z := Temp_Z / 2;

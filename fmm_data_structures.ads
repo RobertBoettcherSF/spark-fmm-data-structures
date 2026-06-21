@@ -1,5 +1,5 @@
 -- FMM Data Structures Specification
--- Version: 0.03
+-- Version: 0.04
 -- Date: 2024-06-21
 -- Description: SPARK formal specification for FMM data structures and algorithms
 
