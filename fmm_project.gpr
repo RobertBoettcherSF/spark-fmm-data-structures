@@ -1,13 +1,18 @@
+-- FMM Data Structures Project File
+-- Version: 0.01
+-- Date: 2024-06-21
+-- Description: GNAT project file for FMM data structures implementation
+
 project Fmm_Project is
    for Source_Dirs use (".");
    for Object_Dir use "obj";
-   for Main use (); 
-   
+   for Main use ("fmm_data_structures.adb");
+
    package Compiler is
       for Default_Switches ("Ada") use ("-g", "-O2", "-gnata", "-gnatwa");
    end Compiler;
 
    package Prove is
-      for Proof_Switches ("Ada") use ("--level=1", "--report=all");
+      for Proof_Switches ("Ada") use ("--level=4", "--report=all", "--no-inlining");
    end Prove;
 end Fmm_Project;
