@@ -1,0 +1,13 @@
+project Fmm_Project is
+   for Source_Dirs use (".");
+   for Object_Dir use "obj";
+   for Main use (); 
+   
+   package Compiler is
+      for Default_Switches ("Ada") use ("-g", "-O2", "-gnata", "-gnatwa");
+   end Compiler;
+
+   package Prove is
+      for Proof_Switches ("Ada") use ("--level=1", "--report=all");
+   end Prove;
+end Fmm_Project;
