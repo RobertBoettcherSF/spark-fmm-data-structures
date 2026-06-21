@@ -1,5 +1,5 @@
 -- FMM Data Structures Specification
--- Version: 0.04
+-- Version: 0.05
 -- Date: 2024-06-21
 -- Description: SPARK formal specification for FMM data structures and algorithms
 
@@ -52,6 +52,8 @@ package Fmm_Data_Structures is
 
    -- Morton index computation (3D bit interleaving)
    function Compute_Morton_Index (P : Vector_3D; L : Level) return Morton_Index
-     with Post => Compute_Morton_Index'Result < 2**64;
+     with
+       Pre  => P.X >= 0.0 and P.Y >= 0.0 and P.Z >= 0.0,
+       Post => Compute_Morton_Index'Result < 2**64;
 
 end Fmm_Data_Structures;
