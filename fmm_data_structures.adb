@@ -1,5 +1,5 @@
 -- FMM Data Structures Implementation
--- Version: 0.01
+-- Version: 0.02
 -- Date: 2024-06-21
 -- Description: SPARK implementation of FMM data structures and algorithms
 
@@ -9,9 +9,9 @@ with Fmm_Data_Structures; use Fmm_Data_Structures;
 package body Fmm_Data_Structures is
 
    -- Bit interleaving for 3D Morton index
-   function Interleave_Bits (X, Y, Z : Integer) return Morton_Index is
+   function Interleave_Bits (X_Val, Y_Val, Z_Val : Integer) return Morton_Index is
       Result : Morton_Index := 0;
-      Temp_X, Temp_Y, Temp_Z : Integer := X, Y, Z;
+      Temp_X, Temp_Y, Temp_Z : Integer := X_Val, Y_Val, Z_Val;
    begin
       for I in 0 .. 20 loop
          Result := Result or
@@ -26,8 +26,8 @@ package body Fmm_Data_Structures is
    end Interleave_Bits;
 
    -- Morton index for a particle at a given level
-   function Compute_Morton_Index (P : Vector_3D; Level : Level) return Morton_Index is
-      Scale : constant Float := Float (2 ** Level);
+   function Compute_Morton_Index (P : Vector_3D; L : Level) return Morton_Index is
+      Scale : constant Float := Float (2 ** L);
       X_Quantized : Integer := Integer (P.X * Scale);
       Y_Quantized : Integer := Integer (P.Y * Scale);
       Z_Quantized : Integer := Integer (P.Z * Scale);
