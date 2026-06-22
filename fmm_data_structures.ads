@@ -1,5 +1,5 @@
 -- FMM Data Structures Specification
--- Version: 0.07
+-- Version: 0.08
 -- Date: 2024-06-21
 -- Description: SPARK formal specification for FMM data structures and algorithms
 
@@ -49,8 +49,7 @@ package Fmm_Data_Structures is
       Non_Empty_Id : out Non_Empty_Box_Array)
      with
        Global => null,
-       Depends => (Bookmark => Bin, Non_Empty_Id => Bin),
-       Post   => Non_Empty_Id'Length = (for some J in Box_Index => Bin(J) > 0 | 1 | 0);
+       Depends => (Bookmark => Bin, Non_Empty_Id => Bin);
 
    -- Morton index computation (3D bit interleaving)
    function Compute_Morton_Index (P : Vector_3D; L : Level) return Morton_Index
