@@ -1,5 +1,5 @@
 -- FMM Data Structures Specification
--- Version: 0.06
+-- Version: 0.07
 -- Date: 2024-06-21
 -- Description: SPARK formal specification for FMM data structures and algorithms
 
@@ -39,6 +39,7 @@ package Fmm_Data_Structures is
      with
        Global => null,
        Depends => (Sort_Idx => Particles, Bin => Particles),
+       Pre    => (for all I in Particle_Index => Particles(I).X >= 0.0 and Particles(I).Y >= 0.0 and Particles(I).Z >= 0.0),
        Post   => (for all I in Box_Index => Bin (I) <= Max_Particles);
 
    -- Algorithm 3: GET-BOOKMARK-AND-BOX-INDEX
@@ -48,12 +49,14 @@ package Fmm_Data_Structures is
       Non_Empty_Id : out Non_Empty_Box_Array)
      with
        Global => null,
-       Depends => (Bookmark => Bin, Non_Empty_Id => Bin);
+       Depends => (Bookmark => Bin, Non_Empty_Id => Bin),
+       Post   => Non_Empty_Id'Length = (for some J in Box_Index => Bin(J) > 0 | 1 | 0);
 
    -- Morton index computation (3D bit interleaving)
    function Compute_Morton_Index (P : Vector_3D; L : Level) return Morton_Index
      with
-       Pre  => P.X >= 0.0 and P.Y >= 0.0 and P.Z >= 0.0,
-       Post => Compute_Morton_Index'Result < 2**64;
+       Pre  => P.X >= 0.0 and P.X <= Float(Max_Boxes) and
+               P.Y >= 0.0 and P.Y <= Float(Max_Boxes) and
+               P.Z >= 0.0 and P.Z <= Float(Max_Boxes);
 
 end Fmm_Data_Structures;

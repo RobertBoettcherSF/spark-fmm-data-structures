@@ -1,5 +1,5 @@
 -- FMM Data Structures Implementation
--- Version: 0.06
+-- Version: 0.07
 -- Date: 2024-06-21
 -- Description: SPARK implementation of FMM data structures and algorithms
 
@@ -69,7 +69,7 @@ package body Fmm_Data_Structures is
       -- Count non-empty boxes and compute prefix sum
       for I in Box_Index loop
          pragma Loop_Invariant (Non_Empty_Count <= Natural(I) + 1);
-         pragma Loop_Invariant (Current_Sum <= Max_Particles);
+         pragma Loop_Invariant (Current_Sum <= Max_Particles and Current_Sum + Bin(I) <= Max_Particles);
          if Bin (I) > 0 then
             Non_Empty_Count := Non_Empty_Count + 1;
          end if;
@@ -83,7 +83,7 @@ package body Fmm_Data_Structures is
          J : Positive := 1;
       begin
          for I in Box_Index loop
-            pragma Loop_Invariant (J <= Non_Empty_Count + 1);
+            pragma Loop_Invariant (J <= Non_Empty_Count + 1 and J >= 1);
             if Bin (I) > 0 then
                Non_Empty_Id (J) := I;
                J := J + 1;
